@@ -1,4 +1,5 @@
 {
+    "plugins": ["prettier-plugin-jsdoc"],
     "tabWidth": 4,
     "useTabs": false,
     "printWidth": 100,

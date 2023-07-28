@@ -1,14 +1,13 @@
-
 module.exports = function startServer({ mainWindow }) {
     const express = require('express')
-    const { app, BrowserView, BrowserWindow } = require('electron')
+    const { BrowserWindow } = require('electron')
 
     const server = express()
 
-    const hostname = '127.0.0.1';
-    const port = 8899;
+    const hostname = '127.0.0.1'
+    const port = 8899
 
-    let modalWindow;
+    let modalWindow
 
     server.use(express.json()) // for parsing application/json
     server.use(express.urlencoded({ extended: true }))
@@ -18,33 +17,39 @@ module.exports = function startServer({ mainWindow }) {
     })
 
     server.post('/url', (req, res) => {
-        console.log(req.body)
-        if(req.body.url) {
+        if (req.body.url) {
             // const view = new BrowserView()
             // mainWindow.setBrowserView(view)
             // view.setBounds({ x: 0, y: 100, width: 1200, height: 700 })
             // // view.webContents.loadURL('https://electronjs.org')
             // view.webContents.loadURL(req.body.url)
-            if(!modalWindow) {
-                modalWindow = new BrowserWindow({ parent: mainWindow,x:0, y:0, modal: true, simpleFullscreen: true, fullscreen: true, show: false,})
+            if (!modalWindow) {
+                modalWindow = new BrowserWindow({
+                    parent: mainWindow,
+                    x: 0,
+                    y: 0,
+                    modal: true,
+                    simpleFullscreen: true,
+                    fullscreen: true,
+                    show: false
+                })
             }
 
             modalWindow.loadURL(req.body.url)
             modalWindow.once('ready-to-show', () => {
                 // modalWindow.setSimpleFullScreen(true)
-                modalWindow.show();
+                modalWindow.show()
             })
-            
         }
         res.json(req.body)
     })
 
     server.get('/close', (req, res) => {
-       if(modalWindow) {
-        // modalWindow.setSimpleFullScreen(false)
-        modalWindow.destroy();
-       }
-       res.send('ok')
+        if (modalWindow) {
+            // modalWindow.setSimpleFullScreen(false)
+            modalWindow.destroy()
+        }
+        res.send('ok')
     })
 
     server.get('/info', (req, res) => {
@@ -57,12 +62,11 @@ module.exports = function startServer({ mainWindow }) {
                 isSimpleFullScreen: mainWindow?.isSimpleFullScreen(),
                 isFullScreen: modalWindow?.isFullScreen()
             }
-
         })
     })
 
     server.listen(port, () => {
-        console.log(`Server running at http://${hostname}:${port}/`);
+        // eslint-disable-next-line no-console
+        console.log(`Server running at http://${hostname}:${port}/`)
     })
-
 }

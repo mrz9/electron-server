@@ -1,0 +1,13 @@
+{
+    "env": {
+        "node": true,
+        "commonjs": true
+    },
+    "extends": ["@antfu", "plugin:prettier/recommended"],
+    "rules": {
+        "jsonc/indent": "off",
+        "n/prefer-global/process": "off",
+        "no-console": "error",
+        "camelcase": "off"
+    }
+}
