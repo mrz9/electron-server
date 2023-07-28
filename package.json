@@ -1,0 +1,23 @@
+{
+  "name": "electron-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "lint": "eslint --ext \".html,.js,.json\" --ignore-path .eslintignore .",
+    "lintfix": "eslint --fix --ext \".html,.js,.json\" --ignore-path .eslintignore ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.39.8",
+    "electron": "^25.3.2",
+    "eslint": "^8.45.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

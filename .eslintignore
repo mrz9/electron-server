@@ -1,0 +1,10 @@
+components.d.ts
+nuxt.d.ts
+dist
+.nuxt
+.output
+deploy
+data
+test.js
+node_modules
+package-lock.json
